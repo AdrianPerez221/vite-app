@@ -1,15 +1,12 @@
-import path from "path"
-import tailwindcss from "@tailwindcss/vite"
-import react from "@vitejs/plugin-react"
-import { defineConfig } from "vite"
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
 
-// https://vite.dev/config/
-export default defineConfig({
-  plugins: [react(), tailwindcss()],
-  base: '/vite-app/',
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
-    },
-  },
-})
+export default defineConfig(({ mode }) => {
+  const base =
+    mode === "github" ? "/vite-app/" : "/"; // <- tu repo: vite-app
+
+  return {
+    plugins: [react()],
+    base,
+  };
+});
